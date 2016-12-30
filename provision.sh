@@ -6,7 +6,7 @@
 #
 
 # Which JDK to use (OPENJDK or ORACLE)
-JDK="OPENJDK"
+JDK="ORACLE"
 
 # Payara Version
 PAYARA_VERSION=4.1.1.154
@@ -79,7 +79,7 @@ case "$PAYARA_VERSION" in
 esac
 
 # Payara edition (Full, Web, Micro, etc., from above list)
-PAYARA_ED=$WEB
+PAYARA_ED=$FULL
 
 #
 #
