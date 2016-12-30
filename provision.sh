@@ -14,6 +14,9 @@ PAYARA_VERSION=4.1.1.154
 # Payara directory
 PAYARA_HOME=/opt/payara/payara-$PAYARA_VERSION
 
+# Postgresql lib
+POSTGRESQL_LIB_URL=https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar
+POSTGRESQL_LIB=${POSTGRESQL_LIB_URL##*/}
 
 # Payara Edition URLs
 case "$PAYARA_VERSION" in 
@@ -178,6 +181,21 @@ installService() {
 	esac
 }
 
+# Download and install postgresql lib
+installPostgresqlLib() {
+    echo "installing postgresql lib"
+    wget -q ${POSTGRESQL_LIB_URL} -O ${POSTGRESQL_LIB} > /dev/null
+    for DOMAIN in domain1 payaradomain; do
+        cp ${POSTGRESQL_LIB} ${PAYARA_HOME}/payara41/glassfish/domains/${DOMAIN}/lib/databases
+    done
+    # rm "$POSTGRE_SQL_LIB"
+}
+
+# Install the needed libraries
+installLibs() {
+    installPostgresqlLib
+}
+
 configureOSE
 
 if [ "$JDK" = "ORACLE" ]; then
@@ -187,6 +205,8 @@ else
 fi
 
 installPayara
+
+installLibs
 
 if [ $PAYARA_ED = $WEB                 ] ||
    [ $PAYARA_ED = $FULL                ] ||
