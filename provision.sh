@@ -186,7 +186,7 @@ installPostgresqlLib() {
     echo "installing postgresql lib"
     wget -q ${POSTGRESQL_LIB_URL} -O ${POSTGRESQL_LIB} > /dev/null
     for DOMAIN in domain1 payaradomain; do
-        cp ${POSTGRESQL_LIB} ${PAYARA_HOME}/payara41/glassfish/domains/${DOMAIN}/lib/databases
+        cp ${POSTGRESQL_LIB} ${PAYARA_HOME}/payara41/glassfish/domains/${DOMAIN}/lib
     done
     # rm "$POSTGRE_SQL_LIB"
 }
